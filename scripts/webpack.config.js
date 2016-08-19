@@ -2,6 +2,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const appPkg = require('../app/package')
 
 module.exports = {
@@ -72,9 +73,11 @@ module.exports = {
   },
   target: 'electron',
   plugins: [
-    new webpack.ExternalsPlugin('commonjs2', [
-      './vendor/markdown-it-katex'
-    ].concat(Object.keys(appPkg.dependencies))),
+    new CopyWebpackPlugin([{
+      from: path.join(__dirname, '../src/static'),
+      to: 'static'
+    }], {copyUnmodified: true}),
+    new webpack.ExternalsPlugin('commonjs2', Object.keys(appPkg.dependencies)),
     new ExtractTextPlugin('style.css')
   ]
 }
