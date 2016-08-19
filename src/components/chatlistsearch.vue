@@ -30,7 +30,6 @@
       background-size: 15px;
       cursor: pointer;
       height: 34px;
-      opacity: .6;
       position: absolute;
       right: 10px;
       width: 36px;

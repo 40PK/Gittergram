@@ -9,12 +9,17 @@
 
 <template>
   <div class="chatlist">
-    <app-chatlistsearch></app-chatlistsearch>
+    <app-chatlist-search></app-chatlist-search>
+    <app-chatlist-item
+      :unread-count="0"
+      name="test1">
+    </app-chatlist-item>
   </div>
 </template>
 
 <script>
-  import appChatlistsearch from './chatlistsearch'
+  import appChatlistSearch from './chatlistsearch'
+  import appChatlistItem from './chatlistitem'
 
   export default {
     vuex: {
@@ -32,7 +37,8 @@
 
     },
     components: {
-      appChatlistsearch
+      appChatlistSearch,
+      appChatlistItem
     }
   }
 </script>
