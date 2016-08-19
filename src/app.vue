@@ -1,3 +1,4 @@
+<style src="css/OpenSans.css"></style>
 <style>
   html, body, #app {
     height: 100%;
@@ -7,6 +8,7 @@
   body {
     margin: 0 auto;
     overflow: hidden;
+    font-family: "Open Sans";
   }
 
   #app {
