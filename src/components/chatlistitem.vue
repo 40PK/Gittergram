@@ -22,6 +22,8 @@
         .chatname {
           color: #000;
           align-self: flex-end;
+          font-size: 14px;
+          font-weight: 600;
         }
       }
       .bottom {

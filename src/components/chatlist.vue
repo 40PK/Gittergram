@@ -11,8 +11,11 @@
   <div class="chatlist">
     <app-chatlist-search></app-chatlist-search>
     <app-chatlist-item
-      :unread-count="0"
-      name="test1">
+      v-if="chatList.length > 0"
+      v-for="chat in chatList"
+      :unread-count="chat.unreadItems"
+      :avatar="chat.avatarUrl"
+      :name="chat.name">
     </app-chatlist-item>
   </div>
 </template>
@@ -24,7 +27,7 @@
   export default {
     vuex: {
       getters: {
-
+        chatList: store => store.app.chatList
       },
       actions: {
 
