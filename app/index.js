@@ -6,8 +6,21 @@ const {
   Menu
 } = require('electron')
 const windowStateKeeper = require('electron-window-state')
+const electronOauth2 = require('electron-oauth2')
 const buildMenu = require('./gtg/menu')
 const gtgWindow = require('./gtg/window')
+const config = require('./gtg/config')
+
+const appConfigs = require('./app.json')
+const oAuthConfig = {
+  clientId: appConfigs.GITTER_KEY,
+  clientSecret: appConfigs.GITTER_SECRET,
+  authorizationUrl: 'https://gitter.im/login/oauth/authorize',
+  tokenUrl: 'https://gitter.im/login/oauth/token',
+  useBasicAuthorizationHeader: false,
+  redirectUri: 'http://localhost:7788/login'
+}
+
 
 const platform = os.platform()
 
@@ -40,11 +53,32 @@ if (shouldQuit) {
 }
 
 app.on('ready', () => {
-  Menu.setApplicationMenu(appMenu)
-  mainWindow = createMainWindow()
+  const createAppWindow = () => {
+    Menu.setApplicationMenu(appMenu)
+    mainWindow = createMainWindow()
 
-  if (platform === 'darwin') {
-    mainWindow.setSheetOffset(36)
+    if (platform === 'darwin') {
+      mainWindow.setSheetOffset(36)
+    }
+  }
+
+  if (config.get('token') === null) {
+    const myApiOauth = electronOauth2(oAuthConfig, {
+      alwaysOnTop: true,
+      autoHideMenuBar: true,
+      webPreferences: {
+        nodeIntegration: false
+      }
+    })
+
+    myApiOauth.getAccessToken().then(token => {
+      if (token && token.access_token) {
+        config.set('token', token.access_token)
+        createAppWindow()
+      }
+    })
+  } else {
+    createAppWindow()
   }
 })
 

@@ -1,7 +1,9 @@
 'use strict'
 const Config = require('electron-config')
 const config = new Config({
-  defaults: {}
+  defaults: {
+    token: null
+  }
 })
 
 module.exports = config
