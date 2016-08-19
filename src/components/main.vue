@@ -1,6 +1,6 @@
 <style>
   .main {
-    background-color: blue;
+    background-color: #FFF;
     width: 100%;
     flex: 1 100%;
   }

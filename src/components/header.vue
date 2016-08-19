@@ -1,15 +1,21 @@
 <style>
   $header-height: 39px;
   .header {
-    background-color: red;
+    background-color: #6389a8;
     width: 100%;
-    flex: 1 $header-height;
+    height: $header-height;
+    flex: 1;
+    .headerIcon {
+      width: 26px;
+      height: 26px;
+      margin: 7px;
+    }
   }
 </style>
 
 <template>
-  <header class='header'>
-
+  <header class="header">
+    <img class="headerIcon" src="../assets/titleLogo.png" />
   </header>
 </template>
 
