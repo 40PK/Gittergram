@@ -11,11 +11,12 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.css', '.json'],
+    extensions: ['', '.js', '.vue', '.css', '.json', '.png'],
     alias: {
       src: path.join(__dirname, '../src'),
       utils: path.join(__dirname, '../src/utils'),
       components: path.join(__dirname, '../src/components'),
+      assets: path.join(__dirname, '../src/assets'),
       css: path.join(__dirname, '../src/css'),
       directives: path.join(__dirname, '../src/directives')
     }
@@ -42,6 +43,10 @@ module.exports = {
       {
         test: /\.svg$/,
         loaders: ['svg-inline']
+      },
+      {
+        test: /\.png$/,
+        loaders: ['url-loader']
       }
     ]
   },
