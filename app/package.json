@@ -1,0 +1,24 @@
+{
+  "name": "gittergram",
+  "productName": "Gittergram",
+  "version": "0.0.1",
+  "description": "Gitter client with Telegram design",
+  "author": {
+    "name": "Perkovec",
+    "email": "perkovec24@gmail.com"
+  },
+  "homepage": "https://github.com/Perkovec/Gittergram",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.13.1",
+    "electron-config": "^0.2.1",
+    "electron-window-state": "^3.0.3",
+    "match-at": "^0.1.0",
+    "semver-compare": "^1.0.0",
+    "tildify": "^1.2.0"
+  }
+}
