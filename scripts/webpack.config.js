@@ -12,7 +12,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.css', '.json', '.png', '.ttf'],
+    extensions: ['', '.js', '.vue', '.css', '.json', '.png', '.ttf', '.jpg'],
     alias: {
       src: path.join(__dirname, '../src'),
       utils: path.join(__dirname, '../src/utils'),
@@ -47,7 +47,7 @@ module.exports = {
         loaders: ['svg-inline']
       },
       {
-        test: /\.(png|ttf)$/,
+        test: /\.(png|ttf|jpg)$/,
         loaders: ['url-loader']
       }
     ]
@@ -62,7 +62,8 @@ module.exports = {
       require('postcss-nested'),
       require('postcss-simple-vars'),
       require('postcss-import')(),
-      require('postcss-mixins')
+      require('postcss-mixins'),
+      require('postcss-color-hex-alpha')
     ],
     loaders: {
       css: ExtractTextPlugin.extract(
