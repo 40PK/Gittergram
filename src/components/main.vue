@@ -36,6 +36,7 @@
     ready() {
       this.$store.dispatch('SET_TOKEN', config.get('token'));
       this.gitter = new Gitter(this.token)
+      this.$store.dispatch('UPDATE_LOADING_LIST', true)
       this.gitter.currentUser().then(user => {
         this.$store.dispatch('SET_CURRENT_USER', user);
         this.updateDialogsList()
@@ -43,7 +44,9 @@
     },
     methods: {
       async updateDialogsList() {
+        this.$store.dispatch('UPDATE_LOADING_LIST', true)
         this.currentUser.rooms().then(chats => {
+          this.$store.dispatch('UPDATE_LOADING_LIST', false)
           this.$store.dispatch('SET_CHAT_LIST', chats)
         })
       }
