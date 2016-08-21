@@ -8,6 +8,7 @@
     }
     &.active {
       background-color: #6a91b1;
+      margin-right: -1px;
       .chatname, .time, .message, .sender {
         color: #fff !important;
       }

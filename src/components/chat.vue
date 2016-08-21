@@ -18,13 +18,13 @@
     .chatcontainer {
       display: flex;
       width: 100%;
+      flex-direction: column;
       .chatheader {
-        height: 54px;
+        height: 53px;
         background-color: #fff;
-        box-shadow: 0 1px 0 0 #eaeaea;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
         padding-left: 17px;
         display: flex;
-        width: 100%;
         .left {
           align-self: center;
           display: flex;
@@ -46,6 +46,41 @@
 
         }
       }
+      .chatbody {
+        height: 100%;
+        flex: 1;
+      }
+      .chatfooter {
+        background-color: #fff;
+        border-top: 1px solid rgba(0, 0, 0, .1);
+        display: flex;
+        .editText {
+          border: none;
+          padding-left: 5px;
+          margin: 12px 0px 12px 7px;
+          min-height: 18px;
+          max-height: 256px;
+          font-size: 13px;
+          resize: none;
+          outline: none;
+          flex: 1;
+          line-height: 18px;
+        }
+        .sendbutton {
+          color: #0080c0;
+          background-color: white;
+          font-size: 16px;
+          padding: 12px 16px;
+          transition: all .2s linear;
+          cursor: pointer;
+          align-self: flex-end;
+          -webkit-user-select: none;
+          &:hover {
+            color: #0073ad;
+            background-color: #f5f5f5;
+          }
+        }
+      }
     }
   }
 </style>
@@ -60,14 +95,22 @@
           <div class="bottom">{{activeChat.userCount}} members</div>
         </div>
         <div class="right">
-
+          
         </div>
+      </div>
+      <div class="chatbody">
+      </div>
+      <div class="chatfooter">
+        <autosize-textarea class="editText" rows="1" placeholder="  Write a message"></autosize-textarea>
+        <div class="sendbutton">Send</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import autosizeTextarea from './autosize-textarea'
+
   export default {
     vuex: {
       getters: {
@@ -105,6 +148,9 @@
     },
     methods: {
 
+    },
+    components: {
+      autosizeTextarea
     }
   }
 </script>

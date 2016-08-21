@@ -1,6 +1,6 @@
 <style>
   .chatlist {
-    box-shadow: inset 0 0 1px #eaeaea;
+    border-right: 1px solid rgba(0, 0, 0, .1);
     flex: 35;
     height: 100%;
     min-width: 260px;
