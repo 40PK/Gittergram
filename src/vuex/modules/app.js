@@ -2,7 +2,8 @@ const state = {
   token: null,
   currentUser: null,
   chatList: [],
-  loadingList: false
+  loadingList: false,
+  activeChat: null
 }
 
 const mutations = {
@@ -16,9 +17,12 @@ const mutations = {
   SET_CHAT_LIST(state, list) {
     state.chatList = list
   },
+  SET_ACTIVE_CHAT(state, uid) {
+    state.activeChat = uid
+  },
 
   // UPDATE
-  UPDATE_LOADING_LIST(state, loading) {
+  UPDATE_LOADING_LIST_STATE(state, loading) {
     state.loadingList = loading
   }
 }

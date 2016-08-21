@@ -1,6 +1,6 @@
 <style>
   .chatlist {
-    border-right: 1px solid #eaeaea;
+    box-shadow: inset 0 0 1px #eaeaea;
     flex: 35;
     height: 100%;
     min-width: 260px;
@@ -23,7 +23,9 @@
       :unread-count="chat.unreadItems"
       :avatar="chat.avatarUrl"
       :last-msg="chat.lastMsg"
-      :name="chat.name">
+      :name="chat.name"
+      :active="chat.id === activeChat"
+      @click="setActiveChat(chat.id)">
     </app-chatlist-item>
   </div>
 </template>
@@ -35,11 +37,22 @@
   export default {
     vuex: {
       getters: {
-        chatList: store => store.app.chatList,
-        loadingList: store => store.app.loadingList
+        chatList: store => store.app.chatList.map(chat => {
+          return {
+            unreadItems: chat.unreadItems,
+            avatarUrl: chat.avatarUrl,
+            lastMsg: chat.lastMsg,
+            name: chat.name,
+            id: chat.id
+          }
+        }),
+        loadingList: store => store.app.loadingList,
+        activeChat: store => store.app.activeChat
       },
       actions: {
-
+        setActiveChat({dispatch}, uid) {
+          dispatch('SET_ACTIVE_CHAT', uid)
+        } 
       }
     },
     data() {

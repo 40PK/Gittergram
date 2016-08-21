@@ -37,7 +37,7 @@
     ready() {
       this.$store.dispatch('SET_TOKEN', config.get('token'))
       this.gitter = new Gitter(this.token)
-      this.$store.dispatch('UPDATE_LOADING_LIST', true)
+      this.$store.dispatch('UPDATE_LOADING_LIST_STATE', true)
       this.gitter.currentUser().then(user => {
         this.$store.dispatch('SET_CURRENT_USER', user)
         this.updateDialogsList()
@@ -45,7 +45,7 @@
     },
     methods: {
       async updateDialogsList() {
-        this.$store.dispatch('UPDATE_LOADING_LIST', true)
+        this.$store.dispatch('UPDATE_LOADING_LIST_STATE', true)
 
         const getChatsLastMessage = chat => {
           return new Promise(resolve => {
@@ -68,7 +68,8 @@
 
           return Promise.all(chatsMessage)
         }).then(chats => {
-          this.$store.dispatch('UPDATE_LOADING_LIST', false)
+          chats.sort((a, b) => new Date(b.lastMsg[0].sent).getTime() - new Date(a.lastMsg[0].sent).getTime())
+          this.$store.dispatch('UPDATE_LOADING_LIST_STATE', false)
           this.$store.dispatch('SET_CHAT_LIST', chats)
         })
       }

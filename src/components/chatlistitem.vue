@@ -6,6 +6,18 @@
     &:hover {
       background-color: #f5f5f5;
     }
+    &.active {
+      background-color: #6a91b1;
+      .chatname, .time, .message, .sender {
+        color: #fff !important;
+      }
+      .unread {
+        color: #5b94bf !important;
+      }
+      .counter {
+        background-color: #d3e2ee !important;
+      }
+    }
     img {
       float: left;
       height: 46px;
@@ -53,6 +65,8 @@
             font-weight: 700;
             padding: 1px 5px;
             border-radius: 19px;
+            min-width: 9px;
+            text-align: center;
           }
         }
       }
@@ -61,8 +75,10 @@
 </style>
 
 <template>
-  <div class="chatlistitem">
-    <img :src="avatar" />
+  <div 
+    class="chatlistitem"
+    :class="{'active': active}">
+    <img :src="avatar"/>
     <div class="info">
       <div class="top">
         <div class="chatname">{{name}}</div>
@@ -109,6 +125,10 @@
       },
       unreadCount: {
         type: Number,
+        required: true
+      },
+      active: {
+        type: Boolean,
         required: true
       }
     },
