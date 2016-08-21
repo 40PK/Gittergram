@@ -21,7 +21,6 @@ const oAuthConfig = {
   redirectUri: 'http://localhost:7788/login'
 }
 
-
 const platform = os.platform()
 
 const appMenu = buildMenu()

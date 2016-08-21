@@ -22,6 +22,7 @@
       v-for="chat in chatList"
       :unread-count="chat.unreadItems"
       :avatar="chat.avatarUrl"
+      :last-msg="chat.lastMsg"
       :name="chat.name">
     </app-chatlist-item>
   </div>
