@@ -12,7 +12,6 @@
       width: 26px;
     }
     .headerButton {
-      -webkit-user-select: none;
       color: #d4e3ef;
       cursor: default;
       float: left;
@@ -22,6 +21,7 @@
       line-height: $header-height;
       padding: 0 7px;
       transition: all .15s linear;
+      -webkit-user-select: none;
       &:hover {
         color: #fff;
       }

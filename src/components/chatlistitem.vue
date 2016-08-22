@@ -1,7 +1,7 @@
 <style>
   .chatlistitem {
-    height: 62px;
     background-color: #ffffff;
+    height: 62px;
     padding-right: 10px;
     &:hover {
       background-color: #f5f5f5;
@@ -20,39 +20,40 @@
       }
     }
     img {
+      border-radius: 50px;
       float: left;
       height: 46px;
-      width: 46px;
       padding: 8px 10px;
-      border-radius: 50px;
+      width: 46px;
     }
     .info {
       display: flex;
       flex-direction: column;
-      height: 100%;
       font-size: 13px;
+      height: 100%;
       .top {
-        flex: 1;
         display: flex;
+        flex: 1;
         .chatname {
-          color: #000;
           align-self: center;
-          font-weight: 600;
+          color: #000;
           flex: 1 100%;
+          font-weight: 600;
         }
         .time {
-          color: #a8a8a8;
           align-self: center;
+          color: #a8a8a8;
         }
       }
       .bottom {
-        flex: 1;
         display: flex;
+        flex: 1;
         .message {
-          white-space: nowrap;
+          color: #888888;
+          flex: 1;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: #888888;
+          white-space: nowrap;
           .sender {
             color: #538bb4;
             display: inline-block;
@@ -62,11 +63,11 @@
           color: #fff;
           .counter {
             background-color: #bbbbbb;
+            border-radius: 19px;
             font-size: 12px;
             font-weight: 700;
-            padding: 1px 5px;
-            border-radius: 19px;
             min-width: 9px;
+            padding: 1px 5px;
             text-align: center;
           }
         }

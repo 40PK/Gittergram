@@ -1,44 +1,44 @@
 <style>
   .chat {
-    flex: 65;
-    height: 100%;
     background-image: url('../assets/bg.jpg');
     background-size: cover;
     display: flex;
+    flex: 65;
+    height: 100%;
     .bubble {
-      background-color: #89a0b4;
-      margin: 0 auto;
       align-self: center;
-      color: #fff;
-      font-weight: 600;
-      font-size: 13px;
-      padding: 3px 12px 4px 12px;
+      background-color: #89a0b4;
       border-radius: 27px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0 auto;
+      padding: 3px 12px 4px 12px;
     }
     .chatcontainer {
       display: flex;
-      width: 100%;
       flex-direction: column;
+      width: 100%;
       .chatheader {
-        height: 53px;
         background-color: #fff;
         border-bottom: 1px solid rgba(0, 0, 0, .1);
-        padding-left: 17px;
         display: flex;
+        height: 53px;
+        padding-left: 17px;
         .left {
           align-self: center;
           display: flex;
           flex-direction: column;
           font-size: 13px;
           .top {
-            font-weight: 700;
             flex: 1;
+            font-weight: 700;
             padding: 2px 0;
           }
           .bottom {
             color: #979797;
-            font-weight: 400;
             flex: 1;
+            font-weight: 400;
             padding: 2px 0;
           }
         }
@@ -47,12 +47,12 @@
         }
       }
       .chatbody {
-        height: 100%;
-        flex: 1;
-        overflow: auto;
+        align-items: flex-start;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        flex: 1;
+        height: 100%;
+        overflow: auto;
         padding-bottom: 8px;
         .message {
           width: 100%;
@@ -60,15 +60,15 @@
             display: flex;
           }
           .messagebody {
-            word-wrap: break-word;
-            float: left;
             background-color: #fff;
+            border-radius: 16px;
+            float: left;
+            font-size: 13px;
+            margin: 10px 36px 2px 53px;
             max-width: 430px;
             min-width: 115px;
-            font-size: 13px;
             padding: 7px 13px 8px 13px;
-            margin: 10px 36px 2px 53px;
-            border-radius: 16px;
+            word-wrap: break-word;
             &.attached {
               margin-top: 3px;
             }
@@ -78,25 +78,25 @@
             }
           }
           .messageavatar {
-            float: left;
-            width: 33px;
-            height: 33px;
             border-radius: 33px;
-            margin-top: 8px;
+            float: left;
+            height: 33px;
             margin-left: 13px;
+            margin-top: 8px;
+            width: 33px;
           }
           .messageavatar + .messagebody {
             margin-left: 7px;
           }
           .unread {
-            color: #538bb4;
             background-color: #fcfbfa;
-            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            color: #538bb4;
             font-size: 14px;
             font-weight: 600;
             margin-top: 8px;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            text-align: center;
           }
         }
       }
@@ -106,28 +106,28 @@
         display: flex;
         .editText {
           border: none;
-          padding-left: 5px;
-          margin: 12px 0px 12px 7px;
-          min-height: 18px;
-          max-height: 256px;
-          font-size: 13px;
-          resize: none;
-          outline: none;
           flex: 1;
+          font-size: 13px;
           line-height: 18px;
+          margin: 12px 0px 12px 7px;
+          max-height: 256px;
+          min-height: 18px;
+          outline: none;
+          padding-left: 5px;
+          resize: none;
         }
         .sendbutton {
-          color: #0080c0;
+          -webkit-user-select: none;
+          align-self: flex-end;
           background-color: white;
+          color: #0080c0;
+          cursor: pointer;
           font-size: 16px;
           padding: 12px 16px;
           transition: all .2s linear;
-          cursor: pointer;
-          align-self: flex-end;
-          -webkit-user-select: none;
           &:hover {
-            color: #0073ad;
             background-color: #f5f5f5;
+            color: #0073ad;
           }
         }
       }

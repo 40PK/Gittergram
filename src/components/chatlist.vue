@@ -5,10 +5,10 @@
     height: 100%;
     min-width: 260px;
     .loading {
-      margin-top: 45px;
-      text-align: center;
       color: #767676;
       font-size: 14px;
+      margin-top: 45px;
+      text-align: center;
     }
   }
 </style>
