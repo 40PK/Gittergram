@@ -71,7 +71,11 @@
 
           return Promise.all(chatsMessage)
         }).then(chats => {
-          chats.sort((a, b) => new Date(b.lastMsg[0].sent).getTime() - new Date(a.lastMsg[0].sent).getTime())
+          chats.sort((a, b) => {
+            const aTime = (a.lastMsg[0] && a.lastMsg[0].sent) || a.lastAccessTime 
+            const bTime = (b.lastMsg[0] && b.lastMsg[0].sent) || b.lastAccessTime 
+            new Date(bTime).getTime() - new Date(aTime).getTime()
+          })
           this.$store.dispatch('UPDATE_LOADING_LIST_STATE', false)
           this.$store.dispatch('SET_CHAT_LIST', chats)
         })

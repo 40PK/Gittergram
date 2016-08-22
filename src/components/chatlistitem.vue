@@ -84,12 +84,14 @@
     <div class="info">
       <div class="top">
         <div class="chatname">{{name}}</div>
-        <div class="time">{{dateParse(lastMsg[0].sent)}}</div>
+        <div class="time"
+          v-if="lastMsg[0]">{{dateParse(lastMsg[0].sent)}}</div>
       </div>
       <div class="bottom">
         <div class="message">
-          <div class="sender">{{lastMsg[0].fromUser.displayName.split(' ')[0] + ':'}}</div>
-          {{lastMsg[0].text || ''}}
+          <div class="sender"
+            v-if="lastMsg[0]">{{lastMsg[0].fromUser.displayName.split(' ')[0] + ':'}}</div>
+          {{(lastMsg[0] && lastMsg[0].text) || ''}}
         </div>
         <div v-if="unreadCount > 0"
           class="unread">
