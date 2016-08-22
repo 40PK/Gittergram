@@ -33,6 +33,7 @@
 <script>
   import appChatlistSearch from './chatlistsearch'
   import appChatlistItem from './chatlistitem'
+  import event from 'utils/event'
 
   export default {
     vuex: {
@@ -51,7 +52,10 @@
       },
       actions: {
         setActiveChat({dispatch}, uid) {
-          dispatch('SET_ACTIVE_CHAT', uid)
+          if (this.activeChat !== uid) {
+            dispatch('SET_ACTIVE_CHAT', uid)
+            event.emit('open-current-chat')
+          }
         } 
       }
     },

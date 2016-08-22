@@ -49,6 +49,56 @@
       .chatbody {
         height: 100%;
         flex: 1;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 8px;
+        .message {
+          width: 100%;
+          .flexcontainer {
+            display: flex;
+          }
+          .messagebody {
+            word-wrap: break-word;
+            float: left;
+            background-color: #fff;
+            max-width: 430px;
+            min-width: 115px;
+            font-size: 13px;
+            padding: 7px 13px 8px 13px;
+            margin: 10px 36px 2px 53px;
+            border-radius: 16px;
+            &.attached {
+              margin-top: 3px;
+            }
+            .sender {
+              color: #000;
+              font-weight: 600;
+            }
+          }
+          .messageavatar {
+            float: left;
+            width: 33px;
+            height: 33px;
+            border-radius: 33px;
+            margin-top: 8px;
+            margin-left: 13px;
+          }
+          .messageavatar + .messagebody {
+            margin-left: 7px;
+          }
+          .unread {
+            color: #538bb4;
+            background-color: #fcfbfa;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+          }
+        }
       }
       .chatfooter {
         background-color: #fff;
@@ -99,6 +149,24 @@
         </div>
       </div>
       <div class="chatbody">
+        <div v-for="message in messages"
+          class="message">
+          <div class="unread"
+            id="unread" 
+            v-if="message.unread && (messages[$index - 1]?!messages[$index - 1].unread:true)">Unread</div>
+          <div class="flexcontainer">
+            <img class="messageavatar"
+              :src="message.fromUser.avatarUrlSmall"
+              v-if="!isPrevMessageAuthor(message.fromUser.id, $index)" />
+            <div class="messagebody"
+              :class="{'attached': isPrevMessageAuthor(message.fromUser.id, $index)}">
+              <div class="sender"
+                v-if="!isPrevMessageAuthor(message.fromUser.id, $index)"
+                :style="{color: getUserColor(message.fromUser.id)}">{{message.fromUser.displayName}}</div>
+              {{message.text}}
+            </div>
+          </div>
+        </div>
       </div>
       <div class="chatfooter">
         <autosize-textarea class="editText" rows="1" placeholder="  Write a message"></autosize-textarea>
@@ -109,6 +177,9 @@
 </template>
 
 <script>
+  import color from 'utils/color'
+  import event from 'utils/event'
+  import {$} from 'utils/dom'
   import autosizeTextarea from './autosize-textarea'
 
   export default {
@@ -137,7 +208,8 @@
             }
             ++i
           }
-        }
+        },
+        messages: store => store.app.messages
       },
       actions: {
 
@@ -146,8 +218,25 @@
     data() {
       return {}
     },
+    watch: {
+      messages() {
+        const unreadCounter = $('#unread')
+        if (unreadCounter) {
+          unreadCounter.scrollIntoView()
+        } else {
+          const body = $('.chatbody');
+          body.scrollTop = body.scrollHeight;
+        }
+      }
+    },
     methods: {
-
+      getUserColor(id) {
+        return color.getHexColor(id)
+      },
+      isPrevMessageAuthor(id, index) {
+        const msg = this.messages[index - 1]
+        return id === (msg && msg.fromUser.id)
+      }
     },
     components: {
       autosizeTextarea

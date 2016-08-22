@@ -3,7 +3,8 @@ const state = {
   currentUser: null,
   chatList: [],
   loadingList: false,
-  activeChat: null
+  activeChat: null,
+  messages: []
 }
 
 const mutations = {
@@ -24,6 +25,13 @@ const mutations = {
   // UPDATE
   UPDATE_LOADING_LIST_STATE(state, loading) {
     state.loadingList = loading
+  },
+
+  // PUSH
+  PUSH_MESSAGES(state, msgs) {
+    const messages = state.messages.slice(0)
+    Array.prototype.unshift.apply(messages, msgs)
+    state.messages = messages
   }
 }
 

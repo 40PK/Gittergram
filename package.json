@@ -75,6 +75,7 @@
     "hint.css": "2.3.2",
     "node-gitter": "^2.0.4",
     "pify": "^2.3.0",
+    "seedrandom": "^2.4.2",
     "vue": "^1.0.26",
     "vuex": "^1.0.0-rc.2"
   }

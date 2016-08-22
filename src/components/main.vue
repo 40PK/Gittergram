@@ -17,6 +17,7 @@
 <script>
   import {remote} from 'electron'
   import Gitter from 'node-gitter'
+  import event from 'utils/event'
   import appChatlist from './chatlist'
   import appChat from './chat'
 
@@ -28,13 +29,15 @@
       getters: {
         token: state => state.app.token,
         currentUser: state => state.app.currentUser,
-        chatList: state => state.app.chatList
+        chatList: state => state.app.chatList,
+        activeChat: state => state.app.activeChat
       },
       actions: {
 
       }
     },
     ready() {
+      this.listenEvents()
       this.$store.dispatch('SET_TOKEN', config.get('token'))
       this.gitter = new Gitter(this.token)
       this.$store.dispatch('UPDATE_LOADING_LIST_STATE', true)
@@ -71,6 +74,15 @@
           chats.sort((a, b) => new Date(b.lastMsg[0].sent).getTime() - new Date(a.lastMsg[0].sent).getTime())
           this.$store.dispatch('UPDATE_LOADING_LIST_STATE', false)
           this.$store.dispatch('SET_CHAT_LIST', chats)
+        })
+      },
+      listenEvents() {
+        event.on('open-current-chat', () => {
+          this.gitter.rooms.find(this.activeChat).then(room => {
+            return room.chatMessages({limit: 50})
+          }).then(msgs => {
+            this.$store.dispatch('PUSH_MESSAGES', msgs)
+          })
         })
       }
     },
