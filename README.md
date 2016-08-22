@@ -6,4 +6,4 @@ WARNING! Client not completed!
 
 ## Screenshot
 
-![./images/gitter_window.png]()
+![Gitter](./images/gitter_window.png)
