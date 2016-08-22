@@ -162,7 +162,7 @@
           class="message">
           <div class="unread"
             id="unread" 
-            v-if="message.unread && (messages[$index - 1]?!messages[$index - 1].unread:true)">Unread</div>
+            v-if="message.unread && (messages[$index - 1]?!messages[$index - 1].unread:true)">{{activeChat.unreadItems}} unread messages</div>
           <div class="flexcontainer">
             <img class="messageavatar"
               :src="message.fromUser.avatarUrlSmall"
