@@ -49,54 +49,62 @@
       .chatbody {
         align-items: flex-start;
         display: flex;
-        flex-direction: column;
         flex: 1;
         height: 100%;
         overflow: auto;
         padding-bottom: 8px;
-        .message {
-          width: 100%;
-          .flexcontainer {
+        .box {
+          min-height: -webkit-min-content;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          .message {
+            width: 100%;
             display: flex;
-          }
-          .messagebody {
-            background-color: #fff;
-            border-radius: 16px;
-            float: left;
-            font-size: 13px;
-            margin: 10px 36px 2px 53px;
-            max-width: 430px;
-            min-width: 115px;
-            padding: 7px 13px 8px 13px;
-            word-wrap: break-word;
-            &.attached {
-              margin-top: 3px;
+            flex-direction: column;
+            .flexcontainer {
+              display: flex;
+              flex: 1;
             }
-            .sender {
-              color: #000;
+            .messagebody {
+              background-color: #fff;
+              border-radius: 16px;
+              float: left;
+              font-size: 13px;
+              margin: 10px 36px 2px 53px;
+              max-width: 404px;
+              min-width: 115px;
+              padding: 7px 13px 8px 13px;
+              word-wrap: break-word;
+              &.attached {
+                margin-top: 3px;
+              }
+              .sender {
+                color: #000;
+                font-weight: 600;
+              }
+            }
+            .messageavatar {
+              border-radius: 33px;
+              float: left;
+              height: 33px;
+              margin-left: 13px;
+              margin-top: 8px;
+              width: 33px;
+            }
+            .messageavatar + .messagebody {
+              margin-left: 7px;
+            }
+            .unread {
+              background-color: #fcfbfa;
+              border-bottom: 1px solid rgba(0, 0, 0, .1);
+              color: #538bb4;
+              font-size: 14px;
               font-weight: 600;
+              margin-top: 8px;
+              padding: 6px 0;
+              text-align: center;
             }
-          }
-          .messageavatar {
-            border-radius: 33px;
-            float: left;
-            height: 33px;
-            margin-left: 13px;
-            margin-top: 8px;
-            width: 33px;
-          }
-          .messageavatar + .messagebody {
-            margin-left: 7px;
-          }
-          .unread {
-            background-color: #fcfbfa;
-            border-bottom: 1px solid rgba(0, 0, 0, .1);
-            color: #538bb4;
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 8px;
-            padding: 6px 0;
-            text-align: center;
           }
         }
       }
@@ -149,6 +157,7 @@
         </div>
       </div>
       <div class="chatbody">
+        <div class="box">
         <div v-for="message in messages"
           class="message">
           <div class="unread"
@@ -166,6 +175,7 @@
               {{message.text}}
             </div>
           </div>
+        </div>
         </div>
       </div>
       <div class="chatfooter">
