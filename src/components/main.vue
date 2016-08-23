@@ -20,9 +20,12 @@
   import event from 'utils/event'
   import appChatlist from './chatlist'
   import appChat from './chat'
+  import realtimeClient from 'gitter-realtime-client'
 
   const currentWindow = remote.getCurrentWindow()
   const config = currentWindow.$config
+  const client = new realtimeClient.RealtimeClient({token: config.get('token')})
+  let roomClient;
 
   export default {
     vuex: {
@@ -43,7 +46,10 @@
       this.$store.dispatch('UPDATE_LOADING_LIST_STATE', true)
       this.gitter.currentUser().then(user => {
         this.$store.dispatch('SET_CURRENT_USER', user)
-        this.updateDialogsList()
+        this.updateDialogsList().then(() => {
+          roomClient = new realtimeClient.RoomCollection([], {client, listen: true})
+          this.listenLive()
+        })
       })
     },
     methods: {
@@ -61,7 +67,7 @@
           })
         }
 
-        this.currentUser.rooms().then(chats => {
+        return this.currentUser.rooms().then(chats => {
           let i = 0
           const chatsMessage = []
           while (chats[i]) {
@@ -71,11 +77,6 @@
 
           return Promise.all(chatsMessage)
         }).then(chats => {
-          chats.sort((a, b) => {
-            const aTime = (a.lastMsg[0] && a.lastMsg[0].sent) || a.lastAccessTime 
-            const bTime = (b.lastMsg[0] && b.lastMsg[0].sent) || b.lastAccessTime 
-            new Date(bTime).getTime() - new Date(aTime).getTime()
-          })
           this.$store.dispatch('UPDATE_LOADING_LIST_STATE', false)
           this.$store.dispatch('SET_CHAT_LIST', chats)
         })
@@ -88,6 +89,31 @@
             this.$store.dispatch('PUSH_MESSAGES', msgs)
           })
         })
+      },
+      listenLive() {
+        client.subscribe('/v1/user/' + this.currentUser.id, msg => {
+          if (msg.notification !== "user_notification" ) return
+
+          console.log(msg)
+          
+          const chats = this.chatList
+          let i = 0
+          while (chats[i]) {
+            if (chats[i].id === msg.troupeId) {
+              chats[i].lastMsg = [{
+                sent: (new Date()).getTime(),
+                text: msg.text,
+                fromUser: {
+                  displayName: msg.title.split('@')[0].slice(0, -1)
+                }
+              }]
+              chats[i].unreadItems++
+              this.$store.dispatch('SET_CHAT_LIST', chats)
+              break
+            }
+            ++i
+          }
+        }) 
       }
     },
     components: {

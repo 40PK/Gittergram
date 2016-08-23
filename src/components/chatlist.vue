@@ -19,7 +19,7 @@
     <div v-if="loadingList" class="loading">Loading...</div>
     <app-chatlist-item
       v-if="chatList.length > 0 && !loadingList"
-      v-for="chat in chatList"
+      v-for="chat in chats"
       :unread-count="chat.unreadItems"
       :avatar="chat.avatarUrl"
       :last-msg="chat.lastMsg"
@@ -61,6 +61,14 @@
     },
     data() {
       return {}
+    },
+    computed: {
+      chats() {
+       return this.chatList.sort((a, b) => {
+        const aTime = (a.lastMsg[0] && a.lastMsg[0].sent) || a.lastAccessTime 
+        const bTime = (b.lastMsg[0] && b.lastMsg[0].sent) || b.lastAccessTime 
+        return new Date(bTime).getTime() - new Date(aTime).getTime()
+      })}
     },
     methods: {
 
